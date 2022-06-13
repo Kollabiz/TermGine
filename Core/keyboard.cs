@@ -18,12 +18,18 @@ namespace TermGine.Core.Keyboard
         private const int KEY_TOGGLED = 1;
         private const int KEY_PRESSED = 8000;
 
+        ///<summary>
+        ///Returns state of given key
+        ///</summary>
         public static bool IsKeyPressed(int k)
         {
             short status = GetKeyState(k);
             return (status == KEY_PRESSED);
         }
 
+        ///<summary>
+        ///Returns true if any key pressed, else false
+        ///</summary>
         public static bool IsAnyKeyPressed()
         {
             GetKeyState(0);
@@ -48,6 +54,9 @@ namespace TermGine.Core.Keyboard
             return keys.Any(k => k != 0);
         }
 
+        ///<summary>
+        ///Waits until any key getting pressed
+        ///</summary>
         public static void WaitForKeyDown()
         {
             bool AnyKeyPressed;
@@ -57,6 +66,9 @@ namespace TermGine.Core.Keyboard
             } while(!AnyKeyPressed);
         }
 
+        ///<summary>
+        ///Waits until any key getting released
+        ///</summary>
         public static void WaitForKeyUp()
         {
             bool AnyKeyPressed;
@@ -66,6 +78,9 @@ namespace TermGine.Core.Keyboard
             } while(AnyKeyPressed);
         }
 
+        ///<summary>
+        ///Reads all characters from input stream
+        ///<summary>
         public static void FlushInputStream()
         {
             while(Console.KeyAvailable)

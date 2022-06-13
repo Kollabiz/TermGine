@@ -51,7 +51,7 @@ namespace Demos
 
         public override void onUpdate(float dt)
         {
-            scene.surface.Copy(pos, matrix);
+            scene.GetSurface().Copy(pos, matrix);
         }
     }
 
@@ -196,7 +196,7 @@ namespace Demos
         public static void EndSort(BarSorterClass sorter, int countOfBars, Scene scene)
         {
             Thread.Sleep(500);
-            scene.Stopped = true;
+            scene.Interrupt();
             Console.Clear();
             Thread.Sleep(500);
             Info.printStats(sorter, countOfBars);
@@ -217,14 +217,14 @@ namespace Demos
             };
 
             Scene scene = new Scene(60, 60, 5f);
-            scene.header = "The Art Of Sorting";
+            scene.SetHeader("The Art Of Sorting");
             BarClass[] bars = Other.CreateBars(60, scene);
 
             foreach(BarSorterClass sorter in sorters)
             {
                 Other.Shuffle(bars);
                 sorter.delayedInit(scene, bars);
-                scene.header = sorter.getSorterAlgorithmName();
+                scene.SetHeader(sorter.getSorterAlgorithmName());
                 scene.Start();
             }
         }

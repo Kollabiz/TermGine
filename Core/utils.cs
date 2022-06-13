@@ -20,9 +20,36 @@ namespace TermGine.Core
             return Color.FromArgb(mixedA, mixedR, mixedG, mixedB);
         }
 
+        ///<summary>
+        ///Static method <c>UnixNow</c> returns
+        ///time of its call in seconds of
+        ///unix epoch
+        ///</summary>
         public static double UnixNow()
         {
             return DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+        }
+
+        ///<summary>
+        ///Static method <c>NormalMapFromImage</c> creates
+        ///array of <c>Vector3</c> from OpenGL normal map image
+        ///</summary>
+        public static Vector3[,] NormalMapFromImage(string path)
+        {
+            Bitmap img = (Bitmap)(Bitmap.FromFile(path));
+            Vector3[,] normals = new Vector3[img.Height,img.Width];
+
+            for(int y = 0; y < img.Height; y++)
+            {
+                for(int x = 0; x < img.Width; x++)
+                {
+                    Color pxColor = img.GetPixel(x, y);
+                    Vector3 normal = new Vector3(pxColor.R, pxColor.G, pxColor.B).Normalized();
+                    normals[y, x] = normal;
+                }
+            }
+            img.Dispose();
+            return normals;
         }
     }
 }

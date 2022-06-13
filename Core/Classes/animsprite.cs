@@ -1,5 +1,9 @@
 namespace TermGine
 {
+    ///<summary>
+    ///Class <c>AnimatedSprite</c> implements simple
+    ///animated sprite
+    ///</summary>
     class AnimatedSprite: Sprite
     {  
         public List<Core.ColorMatrix> frames;
@@ -14,8 +18,8 @@ namespace TermGine
             {
                 frames.Add(Core.ColorMatrix.FromImage(file));
             }
-            position = _position;
-            matrix = frames[0];
+            SetPosition(_position);
+            OverrideMatrix(frames[0]);
         }
 
         public override void onUpdate(float dt)
@@ -25,9 +29,9 @@ namespace TermGine
                 currentFrame = 0f;
             }
 
-            matrix = frames[(int)(Math.Floor(currentFrame))];
+            OverrideMatrix(frames[(int)(Math.Floor(currentFrame))]);
 
-            scene.surface.Copy(position, matrix);
+            scene.GetSurface().Copy(GetPosition(), GetMatrix());
         }
     }
 }

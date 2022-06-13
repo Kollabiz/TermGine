@@ -95,6 +95,9 @@ namespace TermGine.Core
             }
         }
 
+        ///<summary>
+        ///Method <c>Fill</c> fills matrix with given color
+        ///</summary>
         public void Fill(Color color) {
             for(int y = 0; y < size[1]; y++)
             {
@@ -105,6 +108,10 @@ namespace TermGine.Core
             }
         }
 
+        ///<summary>
+        ///Method <c>ToString</c> converts given matrix
+        ///to string
+        ///</summary>
         public override string ToString()
         {
             string converted = "";
@@ -119,6 +126,10 @@ namespace TermGine.Core
             return converted;
         }
 
+        ///<summary>
+        ///Method <c>Print</c> prints matrix to output stream
+        ///without converting whole matrix to string and storing it
+        ///</summary>
         public void Print()
         {
             int i = 1;

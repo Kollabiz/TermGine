@@ -3,6 +3,10 @@ using System.Drawing;
 
 namespace TermGine
 {
+    ///<summary>
+    ///Class <c>Pseudo3DSprite</c> implements sprite
+    ///with simple shading
+    ///</summary>
     class Pseudo3DSprite: GameObject
     {
         private Vector3[,] normalMap;
@@ -23,7 +27,7 @@ namespace TermGine
         public Pseudo3DSprite(Scene _scene, string _normalMap, ColorMatrix _diff)
         {
             InitGameObject(_scene);
-            normalMap = NormalMapFromImage(_normalMap);
+            normalMap = Utils.NormalMapFromImage(_normalMap);
             diffuse = _diff;
             shaded = new ColorMatrix(_diff.size[0], _diff.size[1]);
             pos = new Vector2(0, 0);
@@ -32,7 +36,7 @@ namespace TermGine
         public Pseudo3DSprite(Scene _scene, string _normalMap, string _diff)
         {
             InitGameObject(_scene);
-            normalMap = NormalMapFromImage(_normalMap);
+            normalMap = Utils.NormalMapFromImage(_normalMap);
             diffuse = ColorMatrix.FromImage(_diff);
             shaded = new ColorMatrix(diffuse.size[0], diffuse.size[1]);
             pos = new Vector2(0, 0);
@@ -49,18 +53,27 @@ namespace TermGine
 
         // Main methods
 
+        ///<summary>
+        ///Method <c>SetPos</c> sets sprite
+        ///position to given position
+        ///</summary>
         public void SetPos(Vector2 _pos)
         {
             pos = _pos;
         }
 
+        ///<summary>
+        ///Method <c>SetPos</c> sets sprite
+        ///position to given position
+        ///</summary>
         public void SetPos(int x, int y)
         {
             pos.SetX(x);
             pos.SetY(y);
         }
 
-        public void ShadeAmbient(AmbientLight light)
+        // Ambient (diffuse) shading method
+        private void ShadeAmbient(AmbientLight light)
         {
             for(int y = 0; y < shaded.size[1]; y++)
             {
@@ -80,29 +93,7 @@ namespace TermGine
         public override void onUpdate(float dt)
         {
             ShadeAmbient(scene.GetAmbientLight());
-            scene.surface.Copy(pos, shaded);
-        }
-
-        // Other methods
-
-        public static Vector3[,] NormalMapFromImage(string path)
-        {
-            Bitmap img = (Bitmap)(Bitmap.FromFile(path));
-            Vector3[,] normals = new Vector3[img.Height,img.Width];
-
-            for(int y = 0; y < img.Height; y++)
-            {
-                for(int x = 0; x < img.Width; x++)
-                {
-                    Color pxColor = img.GetPixel(x, y);
-                    // ?
-                    Vector3 normal = new Vector3(pxColor.R, pxColor.G, pxColor.B).Normalized();
-                    //  Maybe this crap would work, but i don't sure
-                    normals[y, x] = normal;
-                }
-            }
-            img.Dispose();
-            return normals;
+            scene.GetSurface().Copy(pos, shaded);
         }
     }
 }
