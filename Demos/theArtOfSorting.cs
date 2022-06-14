@@ -10,9 +10,9 @@ namespace Demos
         private TermGine.Core.Vector2 pos;
         private TermGine.Core.ColorMatrix matrix;
 
-        public BarClass(Scene _scene, byte _height)
+        public BarClass(Scene _scene, byte _height, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             height = _height;
             matrix = new TermGine.Core.ColorMatrix(1, 60);
             for(byte y = 0; y <= height; y++)
@@ -64,9 +64,9 @@ namespace Demos
 
         public BarSorterClass() {}
 
-        public void delayedInit(Scene _scene, BarClass[] _b)
+        public void delayedInit(Scene _scene, BarClass[] _b, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             b = _b;
             bars = Other.NumbersFromBars(_b);
         }
@@ -149,7 +149,7 @@ namespace Demos
             BarClass[] bars = new BarClass[count];
             for(byte i = 0; i < count; i++)
             {
-                bars[i] = new BarClass(scene, i);
+                bars[i] = new BarClass(scene, i, $"bar_{i}");
                 bars[i].setPos(i);
             }
             return bars;
@@ -223,7 +223,7 @@ namespace Demos
             foreach(BarSorterClass sorter in sorters)
             {
                 Other.Shuffle(bars);
-                sorter.delayedInit(scene, bars);
+                sorter.delayedInit(scene, bars, "sorter");
                 scene.SetHeader(sorter.getSorterAlgorithmName());
                 scene.Start();
             }

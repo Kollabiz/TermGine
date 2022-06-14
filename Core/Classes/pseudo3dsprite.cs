@@ -15,36 +15,36 @@ namespace TermGine
         private ColorMatrix shaded;
 
         //  Constructors
-        public Pseudo3DSprite(Scene _scene, Vector3[,] _normalMap, ColorMatrix _diff)
+        public Pseudo3DSprite(Scene _scene, Vector3[,] _normalMap, ColorMatrix _diff, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             normalMap = _normalMap;
             diffuse = _diff;
             shaded = new ColorMatrix(_diff.size[0], _diff.size[1]);
             pos = new Vector2(0, 0);
         }
 
-        public Pseudo3DSprite(Scene _scene, string _normalMap, ColorMatrix _diff)
+        public Pseudo3DSprite(Scene _scene, string _normalMap, ColorMatrix _diff, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             normalMap = Utils.NormalMapFromImage(_normalMap);
             diffuse = _diff;
             shaded = new ColorMatrix(_diff.size[0], _diff.size[1]);
             pos = new Vector2(0, 0);
         }
 
-        public Pseudo3DSprite(Scene _scene, string _normalMap, string _diff)
+        public Pseudo3DSprite(Scene _scene, string _normalMap, string _diff, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             normalMap = Utils.NormalMapFromImage(_normalMap);
             diffuse = ColorMatrix.FromImage(_diff);
             shaded = new ColorMatrix(diffuse.size[0], diffuse.size[1]);
             pos = new Vector2(0, 0);
         }
 
-        public Pseudo3DSprite(Scene _scene, Vector3[,] _normalMap, string _diff)
+        public Pseudo3DSprite(Scene _scene, Vector3[,] _normalMap, string _diff, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             normalMap = _normalMap;
             diffuse = ColorMatrix.FromImage(_diff);
             shaded = new ColorMatrix(diffuse.size[0], diffuse.size[1]);

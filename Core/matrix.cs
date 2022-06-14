@@ -43,7 +43,7 @@ namespace TermGine.Core
         ///</summary>
         public void SetPx(Vector2 pos, Color color)
         {
-            matrix[pos.Y, pos.X] = color;
+            matrix[(int)(pos.Y), (int)(pos.X)] = color;
         }
 
         ///<summary>
@@ -59,7 +59,7 @@ namespace TermGine.Core
         ///</summary>
         public Color GetPx(Vector2 pos) 
         {
-            return matrix[pos.Y, pos.X];
+            return matrix[(int)(pos.Y), (int)(pos.X)];
         }
 
         ///<summary>
@@ -86,10 +86,10 @@ namespace TermGine.Core
                     }
                     if(_matrix.GetPx(x, y).A == 255)
                     {
-                        SetPx(x + origin.X, y + origin.Y, _matrix.GetPx(x, y));
+                        SetPx((int)(x + origin.X), (int)(y + origin.Y), _matrix.GetPx(x, y));
                     } else
                     {
-                        SetPx(x + origin.X, y + origin.Y, Utils.MixColor(_matrix.GetPx(x, y), matrix[y + origin.Y, x + origin.X]));
+                        SetPx((int)(x + origin.X), (int)(y + origin.Y), Utils.MixColor(_matrix.GetPx(x, y), matrix[(int)(y + origin.Y), (int)(x + origin.X)]));
                     }
                 }
             }

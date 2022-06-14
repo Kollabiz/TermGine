@@ -9,18 +9,18 @@ namespace TermGine
         private Core.ColorMatrix matrix;
         private Core.Vector2 position;
 
-        public Sprite(Scene _scene, string imgPath, Core.Vector2 _position)
+        public Sprite(Scene _scene, string imgPath, Core.Vector2 _position, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             matrix = Core.ColorMatrix.FromImage(imgPath);
             position = _position;
         }
 
         public Sprite() {}
 
-        public Sprite(Scene _scene, string imgPath, int x, int y)
+        public Sprite(Scene _scene, string imgPath, int x, int y, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             matrix = Core.ColorMatrix.FromImage(imgPath);
             position = new Core.Vector2(x, y);
         }

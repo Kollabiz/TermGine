@@ -10,9 +10,9 @@ namespace TermGine
         public float currentFrame = 0;
         public float animSpeed = 1f;
 
-        public AnimatedSprite(Scene _scene, string folder, Core.Vector2 _position)
+        public AnimatedSprite(Scene _scene, string folder, Core.Vector2 _position, string _name)
         {
-            InitGameObject(_scene);
+            InitGameObject(_scene, _name);
             frames = new List<Core.ColorMatrix> {};
             foreach(string file in Directory.GetFiles(folder))
             {

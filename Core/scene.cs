@@ -113,6 +113,27 @@ namespace TermGine
             return header;
         }
 
+        public Core.GameObject? GetNode(string childAddr)
+        {
+            string[] caddr = childAddr.Split(".");
+
+            foreach(Core.GameObject node in objects)
+            {
+                if(node.GetName() == caddr[0])
+                {
+                    if(caddr.Length > 1)
+                    {
+                        return node.GetChild(string.Join(".", caddr.Skip(1)));
+                    }
+                    else
+                    {
+                        return node;
+                    }
+                }
+            }
+            return null;
+        }
+
         ///<summary>
         ///Method <c>IsStopped</c> returns current
         ///scene running state

@@ -12,11 +12,11 @@ namespace TermGine.Core {
         public static readonly Vector2 ZERO = new Vector2(0, 0);
 
         ///<summary>X component of vector</summary>
-        public int X;
+        public float X;
         ///<summary>Y component of vector</summary>
-        public int Y;
+        public float Y;
 
-        public Vector2(int _X, int _Y) {
+        public Vector2(float _X, float _Y) {
             X = _X;
             Y = _Y;
         }
@@ -25,7 +25,7 @@ namespace TermGine.Core {
         ///Method <c>SetX</c> sets <c>X</c> component
         ///of vector to given value
         ///</summary>
-        public void SetX(int _X) {
+        public void SetX(float _X) {
             X = _X;
         }
 
@@ -33,7 +33,7 @@ namespace TermGine.Core {
         ///Method <c>SetY</c> sets <c>Y</c> component
         ///of vector to given value
         ///</summary>
-        public void SetY(int _Y) {
+        public void SetY(float _Y) {
             Y = _Y;
         }
 
@@ -41,7 +41,7 @@ namespace TermGine.Core {
         ///Method <c>Set</c> sets both components of
         ///vector to given values
         ///</summary>
-        public void Set(int _X, int _Y) {
+        public void Set(float _X, float _Y) {
             X = _X;
             Y = _Y;
         }
@@ -51,8 +51,8 @@ namespace TermGine.Core {
         ///given values
         ///</summary>
         public void Resize(float sizeX, float sizeY) {
-            X = (int)(X * sizeX);
-            Y = (int)(Y * sizeY);
+            X = X * sizeX;
+            Y = Y * sizeY;
         }
 
         ///<summary>
@@ -60,8 +60,8 @@ namespace TermGine.Core {
         ///given size
         ///</summary>
         public void Resize(float size) {
-            X = (int)(X * size);
-            Y = (int)(Y * size);
+            X = X * size;
+            Y = Y * size;
         }
 
         ///<summary>
@@ -79,8 +79,17 @@ namespace TermGine.Core {
         ///</summary>
         public Vector2 Normalized() {
             float l = Length();
-            int xNormalized = (int)(X / l), yNormalized = (int)(Y / l);
+            float xNormalized = X / l, yNormalized = Y / l;
             return new Vector2(xNormalized, yNormalized);
+        }
+
+        ///<summary>
+        ///Method <c>Dot</c> returns Dot Product of
+        ///this vector and other
+        ///</summary>
+        public float Dot(Vector2 other)
+        {
+            return this.X * other.X + this.Y * other.Y;
         }
 
         ///<summary>
@@ -100,6 +109,11 @@ namespace TermGine.Core {
             int _X = (int)(X * Math.Cos(angle));
             int _Y = (int)(Y * Math.Sin(angle));
             return new Vector2(_X, _Y);
+        }
+
+        public static Vector2 operator /(Vector2 divided, float divisor)
+        {
+            return new Vector2(divided.X / divisor, divided.Y / divisor);
         }
     }
     
@@ -224,6 +238,11 @@ namespace TermGine.Core {
         public static Vector3 operator +(Vector3 first, Vector2 second)
         {
             return new Vector3(first.X + second.X, first.Y + second.Y, first.Z);
+        }
+
+        public static Vector3 operator /(Vector3 divided, float divisor)
+        {
+            return new Vector3(divided.X / divisor, divided.Y / divisor, divided.Z / divisor);
         }
     }
 }

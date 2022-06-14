@@ -11,7 +11,7 @@ namespace ShadingDemo
             Console.ReadKey();
             Scene scene = new Scene(16, 16, 1f);
             scene.SetHeader("Shading test");
-            Pseudo3DSprite sphere = new Pseudo3DSprite(scene, "sphere_norm.png", "sphere_diff.png");
+            Pseudo3DSprite sphere = new Pseudo3DSprite(scene, "sphere_norm.png", "sphere_diff.png", "sphere");
             scene.SetAmbientLightDirection(new Vector3(-32, -32, 0));
 
             scene.Start();
