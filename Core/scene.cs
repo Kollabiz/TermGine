@@ -16,7 +16,7 @@ namespace TermGine
         private AmbientLight ambientLight = new AmbientLight(Core.Vector2.ZERO, Core.Vector3.ZERO);
 
         private Color clearColor = Color.Black;
-        private Core.ColorMatrix surface;
+        private Core.ColorMatrix viewport;
         private bool Stopped = true;
         private bool Paused = false;
 
@@ -26,8 +26,8 @@ namespace TermGine
         {
             System.Console.WriteLine("DEBUG: initialized a new scene");
             objects = new List<Core.GameObject> {};
-            surface = new Core.ColorMatrix(sizeX, sizeY);
-            surface.Fill(clearColor);
+            viewport = new Core.ColorMatrix(sizeX, sizeY);
+            viewport.Fill(clearColor);
             KeepDt = frameTime;
             LastFrameTime = Core.Utils.UnixNow();
         }
@@ -36,8 +36,8 @@ namespace TermGine
         {
             System.Console.WriteLine("DEBUG: initialized a new scene");
             objects = new List<Core.GameObject> {};
-            surface = new Core.ColorMatrix(sizeX, sizeY);
-            surface.Fill(clearColor);
+            viewport = new Core.ColorMatrix(sizeX, sizeY);
+            viewport.Fill(clearColor);
             KeepDt = 0.5f;
             LastFrameTime = Core.Utils.UnixNow();
         }
@@ -99,9 +99,9 @@ namespace TermGine
         ///Method <c>GetSurface</c> returns scene
         ///viewport matrix
         ///</summary>
-        public Core.ColorMatrix GetSurface()
+        public Core.ColorMatrix GetViewport()
         {
-            return surface;
+            return viewport;
         }
 
         ///<summary>
@@ -262,7 +262,7 @@ namespace TermGine
         private void Update()
         {
             float dt = CalcDeltaTime();
-            surface.Fill(clearColor);
+            viewport.Fill(clearColor);
             for(int i = 0; i < objects.Count; i++)
             {
                 Core.GameObject obj = objects[i];
@@ -274,7 +274,7 @@ namespace TermGine
                 Thread.Sleep(diff);
             }
             System.Console.WriteLine(header);
-            surface.Print();
+            viewport.Print();
             Console.SetCursorPosition(0, 1);
             LastFrameTime = Core.Utils.UnixNow();
         }

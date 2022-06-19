@@ -31,7 +31,7 @@ namespace TermGine
 
             OverrideMatrix(frames[(int)(Math.Floor(currentFrame))]);
 
-            scene.GetSurface().Copy(GetPosition(), GetMatrix());
+            scene.GetViewport().Copy(GetPosition(), GetMatrix());
         }
     }
 }

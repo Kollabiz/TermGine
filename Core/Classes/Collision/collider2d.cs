@@ -48,6 +48,11 @@ namespace TermGine.Collision
                 return false;
             }
         }
+
+        public bool Intersects(BoxCollider2D other)
+        {
+            return other.Intersects(this);
+        }
     }
 
     class BoxCollider2D: CollisionShape2D
@@ -68,9 +73,24 @@ namespace TermGine.Collision
             Vector2 a = new Vector2(this.GetPosition().X + this.width, this.GetPosition().Y + this.height);
             Vector2 b = new Vector2(other.GetPosition().X + other.width, other.GetPosition().Y + other.height);
 
-            float Ol = dist - (a / 2).Dot(other.GetPosition()) - (b / 2).Dot(this.GetPosition());
+            float Ol = Math.Abs(dist - (a / 2).Dot(other.GetPosition()) - (b / 2).Dot(this.GetPosition()));
 
             return (Ol > 0);
+        }
+
+        public bool Intersects(SphereCollider2D other)
+        {
+            float dist = Math.Abs(this.GetPosition().X - other.GetPosition().X) + Math.Abs(this.GetPosition().Y - other.GetPosition().Y);
+            Vector2 a = new Vector2(this.GetPosition().X + this.width, this.GetPosition().Y + this.height);
+
+            if(dist < a.Dot(other.GetPosition()) + other.GetRadius())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

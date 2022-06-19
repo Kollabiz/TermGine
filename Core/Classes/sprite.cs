@@ -8,21 +8,24 @@ namespace TermGine
     {
         private Core.ColorMatrix matrix;
         private Core.Vector2 position;
+        private Core.RenderMaterial material;
 
-        public Sprite(Scene _scene, string imgPath, Core.Vector2 _position, string _name)
+        public Sprite(Scene _scene, int sizeX, int sizeY, Core.Vector2 _position, Core.RenderMaterial _material, string _name)
         {
             InitGameObject(_scene, _name);
-            matrix = Core.ColorMatrix.FromImage(imgPath);
+            matrix = new Core.ColorMatrix(sizeX, sizeY);
             position = _position;
+            material = _material;
         }
 
         public Sprite() {}
 
-        public Sprite(Scene _scene, string imgPath, int x, int y, string _name)
+        public Sprite(Scene _scene, Core.Vector2 size, Core.RenderMaterial _material, int x, int y, string _name)
         {
             InitGameObject(_scene, _name);
-            matrix = Core.ColorMatrix.FromImage(imgPath);
+            matrix = new Core.ColorMatrix((int)(size.X), (int)(size.Y));
             position = new Core.Vector2(x, y);
+            material = _material;
         }
 
         ///<summary>
@@ -72,7 +75,8 @@ namespace TermGine
 
         public override void onUpdate(float _dt)
         {
-            scene.GetSurface().Copy(position, matrix);
+            material.Shade(matrix, new Core.Vector3(position.X, position.Y, 0));
+            scene.GetViewport().Copy(position, matrix);
         }
     }
 }

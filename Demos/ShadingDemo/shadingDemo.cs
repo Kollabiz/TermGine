@@ -9,9 +9,13 @@ namespace ShadingDemo
         public static void Main()
         {
             Console.ReadKey();
-            Scene scene = new Scene(16, 16, 1f);
+            Scene scene = new Scene(32, 16, 1f);
             scene.SetHeader("Shading test");
-            Pseudo3DSprite sphere = new Pseudo3DSprite(scene, "sphere_norm.png", "sphere_diff.png", "sphere");
+            RenderMaterial bg = new DiffuseMaterial2D(scene, "background", "grass.png");
+            RenderMaterial mat = new BumpMaterial2D(scene, "bump1", "sphere_diff.png", "sphere_norm.png");
+            Sprite background = new Sprite(scene, 16, 16, new Vector2(0, 0), bg, "bg");
+            Sprite bg2 = new Sprite(scene, 16, 16, new Vector2(16, 0), bg, "bg2");
+            Sprite sphere = new Sprite(scene, 16, 16, new Vector2(0, 0), mat, "sphere");
             scene.SetAmbientLightDirection(new Vector3(-32, -32, 0));
 
             scene.Start();

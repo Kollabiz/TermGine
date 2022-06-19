@@ -51,7 +51,7 @@ namespace Demos
 
         public override void onUpdate(float dt)
         {
-            scene.GetSurface().Copy(pos, matrix);
+            scene.GetViewport().Copy(pos, matrix);
         }
     }
 

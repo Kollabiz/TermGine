@@ -244,5 +244,10 @@ namespace TermGine.Core {
         {
             return new Vector3(divided.X / divisor, divided.Y / divisor, divided.Z / divisor);
         }
+
+        public static Vector3 operator *(Vector3 multiplied, float multiplier)
+        {
+            return new Vector3(multiplied.X * multiplier, multiplied.Y * multiplier, multiplied.Z * multiplier);
+        }
     }
 }
